@@ -13,7 +13,7 @@ Este repositório contém a apresentação dos resultados do trabalho de confer�
 
 ## 🌐 Visualizar a Apresentação
 
-🔗 **[Acesse a Apresentação Online](https://[SEU-USUARIO].github.io/pgm-itajai-calculos/)**
+🔗 **[Acesse a Apresentação Online](https://ricardopera.github.io/pgm-itajai-calculos/)**
 
 ## 📁 Estrutura do Repositório
 
@@ -29,7 +29,7 @@ Este repositório contém a apresentação dos resultados do trabalho de confer�
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/[SEU-USUARIO]/pgm-itajai-calculos.git
+git clone https://github.com/ricardopera/pgm-itajai-calculos.git
 ```
 
 2. Abra o arquivo `index.html` no navegador ou execute:
