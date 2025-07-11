@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados dos Cálculos de Liquidação - PGM Itajaí</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-sizing: border-box;
+            background: white;
+            margin-bottom: 2px;
+            page-break-after: always;
+        }
+        .slide h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        .slide h2 {
+            color: #34495e;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .slide h3 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        .content {
+            max-width: 900px;
+            width: 100%;
+        }
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        .economic-card {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+        .error-card {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        ul {
+            font-size: 1.2em;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .highlight {
+            background: #f39c12;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .chart-placeholder {
+            background: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Título -->
+    <div class="slide">
+        <div class="content">
+            <div class="logo-header">
+                <h1>RELATÓRIO DE RESULTADOS</h1>
+            </div>
+            <h2>Análise de Cálculos de Liquidação de Sentença</h2>
+            <h3 style="text-align: center; color: #7f8c8d;">Procuradoria Geral do Município de Itajaí</h3>
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-size: 1.3em; color: #34495e;">
+                    Conferência e Identificação de Erros em Cálculos da Parte Contrária
+                </p>
+                <p style="font-size: 1.1em; color: #7f8c8d;">
+                    Período de Análise: [Inserir Período]
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Resumo Executivo -->
+    <div class="slide">
+        <div class="content">
+            <h1>Resumo Executivo</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">[X]</div>
+                    <div class="stat-label">Processos Analisados</div>
+                </div>
+                <div class="stat-card error-card">
+                    <div class="stat-number">[Y]</div>
+                    <div class="stat-label">Erros Identificados</div>
+                </div>
+                <div class="stat-card economic-card">
+                    <div class="stat-number">R$ [Z]</div>
+                    <div class="stat-label">Economia Gerada</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">[W]%</div>
+                    <div class="stat-label">Taxa de Sucesso</div>
+                </div>
+            </div>
+            <div class="highlight">
+                Nosso trabalho de conferência resultou em uma economia significativa para o Município de Itajaí
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Metodologia -->
+    <div class="slide">
+        <div class="content">
+            <h1>Metodologia de Trabalho</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                <div>
+                    <h3>🔍 Processo de Análise</h3>
+                    <ul>
+                        <li>Recebimento dos cálculos da parte contrária</li>
+                        <li>Conferência detalhada de cada item</li>
+                        <li>Identificação de inconsistências</li>
+                        <li>Elaboração de cálculo alternativo</li>
+                        <li>Documentação das diferenças</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📊 Critérios de Avaliação</h3>
+                    <ul>
+                        <li>Correção monetária aplicada</li>
+                        <li>Índices utilizados</li>
+                        <li>Períodos de incidência</li>
+                        <li>Juros de mora</li>
+                        <li>Base de cálculo</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Principais Tipos de Erros -->
+    <div class="slide">
+        <div class="content">
+            <h1>Principais Tipos de Erros Identificados</h1>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Erro</th>
+                            <th>Frequência</th>
+                            <th>Impacto Médio</th>
+                            <th>Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Correção Monetária Incorreta</td>
+                            <td>[X] casos</td>
+                            <td>R$ [Y]</td>
+                            <td>Aplicação de índice inadequado</td>
+                        </tr>
+                        <tr>
+                            <td>Juros de Mora Excessivos</td>
+                            <td>[X] casos</td>
+                            <td>R$ [Y]</td>
+                            <td>Taxa superior à legal</td>
+                        </tr>
+                        <tr>
+                            <td>Base de Cálculo Inflada</td>
+                            <td>[X] casos</td>
+                            <td>R$ [Y]</td>
+                            <td>Inclusão de verbas indevidas</td>
+                        </tr>
+                        <tr>
+                            <td>Período de Incidência Incorreto</td>
+                            <td>[X] casos</td>
+                            <td>R$ [Y]</td>
+                            <td>Data inicial/final equivocada</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Resultados Financeiros -->
+    <div class="slide">
+        <div class="content">
+            <h1>Impacto Financeiro dos Resultados</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h3>💰 Economia por Categoria</h3>
+                    <div class="chart-placeholder">
+                        [Inserir Gráfico de Pizza ou Barras]
+                        <br>Economia por Tipo de Erro
+                    </div>
+                </div>
+                <div>
+                    <h3>📈 Evolução Mensal</h3>
+                    <div class="chart-placeholder">
+                        [Inserir Gráfico de Linha]
+                        <br>Economia Acumulada por Mês
+                    </div>
+                </div>
+            </div>
+            <div class="highlight">
+                Total de Economia Gerada: R$ [VALOR TOTAL]
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Casos de Sucesso -->
+    <div class="slide">
+        <div class="content">
+            <h1>Casos de Maior Impacto</h1>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Processo</th>
+                            <th>Valor Original</th>
+                            <th>Valor Corrigido</th>
+                            <th>Economia</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[Nº Processo 1]</td>
+                            <td>R$ [Valor]</td>
+                            <td>R$ [Valor]</td>
+                            <td style="color: #27ae60; font-weight: bold;">R$ [Economia]</td>
+                            <td>✅ Aceito</td>
+                        </tr>
+                        <tr>
+                            <td>[Nº Processo 2]</td>
+                            <td>R$ [Valor]</td>
+                            <td>R$ [Valor]</td>
+                            <td style="color: #27ae60; font-weight: bold;">R$ [Economia]</td>
+                            <td>✅ Aceito</td>
+                        </tr>
+                        <tr>
+                            <td>[Nº Processo 3]</td>
+                            <td>R$ [Valor]</td>
+                            <td>R$ [Valor]</td>
+                            <td style="color: #27ae60; font-weight: bold;">R$ [Economia]</td>
+                            <td>⏳ Em análise</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Taxa de Sucesso -->
+    <div class="slide">
+        <div class="content">
+            <h1>Taxa de Sucesso das Impugnações</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                <div>
+                    <div class="chart-placeholder">
+                        [Inserir Gráfico de Pizza]
+                        <br>Impugnações Aceitas vs Rejeitadas
+                    </div>
+                </div>
+                <div>
+                    <div class="stats-grid">
+                        <div class="stat-card economic-card">
+                            <div class="stat-number">[X]%</div>
+                            <div class="stat-label">Aceitas pela Justiça</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">[Y]</div>
+                            <div class="stat-label">Total de Impugnações</div>
+                        </div>
+                    </div>
+                    <p style="font-size: 1.2em; text-align: center; margin-top: 30px;">
+                        <strong>Nossa taxa de sucesso demonstra a qualidade técnica 
+                        do trabalho realizado pela Procuradoria</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Benefícios e Valor Agregado -->
+    <div class="slide">
+        <div class="content">
+            <h1>Benefícios para o Município</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h3>💡 Benefícios Diretos</h3>
+                    <ul>
+                        <li><strong>Economia Financeira:</strong> Redução de valores a pagar</li>
+                        <li><strong>Precisão Técnica:</strong> Cálculos corretos e fundamentados</li>
+                        <li><strong>Cumprimento Legal:</strong> Aplicação correta da legislação</li>
+                        <li><strong>Transparência:</strong> Prestação de contas eficiente</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📈 Benefícios Indiretos</h3>
+                    <ul>
+                        <li><strong>Credibilidade:</strong> Fortalecimento da imagem institucional</li>
+                        <li><strong>Eficiência:</strong> Otimização de recursos públicos</li>
+                        <li><strong>Precedente:</strong> Orientação para casos futuros</li>
+                        <li><strong>Capacitação:</strong> Melhoria contínua da equipe</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight">
+                O trabalho de conferência é essencial para a proteção do patrimônio público
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Recomendações -->
+    <div class="slide">
+        <div class="content">
+            <h1>Recomendações e Próximos Passos</h1>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+                <div>
+                    <h3>🎯 Ações Recomendadas</h3>
+                    <ul>
+                        <li>Manter a sistemática de conferência de cálculos</li>
+                        <li>Capacitar a equipe em novos índices e legislação</li>
+                        <li>Desenvolver templates de cálculo padronizados</li>
+                        <li>Criar banco de dados de precedentes</li>
+                        <li>Implementar sistema de controle de qualidade</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>📊 Indicadores de Acompanhamento</h3>
+                    <ul>
+                        <li>Taxa de sucesso mensal das impugnações</li>
+                        <li>Valor médio de economia por processo</li>
+                        <li>Tempo médio de análise</li>
+                        <li>Número de erros por tipo identificado</li>
+                        <li>Evolução da qualidade dos cálculos recebidos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 10: Conclusão -->
+    <div class="slide">
+        <div class="content">
+            <h1>Conclusão</h1>
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <div class="stats-grid" style="margin: 40px 0;">
+                    <div class="stat-card economic-card">
+                        <div class="stat-number">R$ [TOTAL]</div>
+                        <div class="stat-label">Economia Total Gerada</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">[X]%</div>
+                        <div class="stat-label">Taxa de Sucesso</div>
+                    </div>
+                </div>
+                
+                <h3 style="color: #2c3e50; margin: 40px 0;">
+                    O trabalho de conferência de cálculos de liquidação de sentença 
+                    tem se mostrado fundamental para:
+                </h3>
+                
+                <ul style="font-size: 1.3em; text-align: left; max-width: 600px; margin: 0 auto;">
+                    <li>✅ Proteger o patrimônio público municipal</li>
+                    <li>✅ Garantir a aplicação correta da legislação</li>
+                    <li>✅ Proporcionar economia significativa aos cofres públicos</li>
+                    <li>✅ Fortalecer a credibilidade da Procuradoria</li>
+                </ul>
+                
+                <div class="highlight" style="margin-top: 40px;">
+                    Continuidade deste trabalho é essencial para manter 
+                    a excelência na defesa dos interesses municipais
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        Procuradoria Geral do Município de Itajaí - Setor de Cálculos Judiciais
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+# Arquivos temporários
+*.tmp
+*.temp
+*.log
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos de backup
+*.bak
+*.old
+*~
+
+# Arquivos Excel temporários
+~$*.xlsx
+~$*.xls
+
+# Cache e logs
+.cache/
+logs/
+
+# Arquivos sensíveis (dados originais)
+pgmjudcalc.csv
+*.xlsx
+
+# IDE
+.vscode/
+.idea/
+
+# Node modules (se usar futuramente)
+node_modules/
