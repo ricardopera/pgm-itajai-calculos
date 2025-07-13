@@ -31,6 +31,7 @@ Para cada Pull Request aberto, uma preview automática é criada e implantada em
   - `sumario-executivo.md` - Resumo para gestores
   - `guia-uso.md` - Manual de utilização
 - `scripts/` - Scripts de automação
+  - `validate-workflows.sh` - Validador de workflows do GitHub Actions
 - `assets/` - Recursos e imagens
 
 ## 🚀 Como Usar Localmente
@@ -47,6 +48,11 @@ start index.html
 
 # Linux/Mac
 open index.html
+```
+
+3. Para validar os workflows do GitHub Actions:
+```bash
+./scripts/validate-workflows.sh
 ```
 
 ## 📊 Principais Destaques
