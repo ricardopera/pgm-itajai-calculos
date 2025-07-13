@@ -15,6 +15,14 @@ Este repositório contém a apresentação dos resultados do trabalho de confer�
 
 🔗 **[Acesse a Apresentação Online](https://ricardopera.github.io/pgm-itajai-calculos/)**
 
+### 🔍 Previews de Pull Requests
+
+Para cada Pull Request aberto, uma preview automática é criada e implantada em:
+- **URL padrão:** `https://ricardopera.github.io/pgm-itajai-calculos/pr-{número}/`
+- **Comentário automático** é adicionado à PR com o link direto
+- **Atualização automática** a cada novo commit na PR
+- **Limpeza automática** quando a PR é fechada
+
 ## 📁 Estrutura do Repositório
 
 - `index.html` - Apresentação principal (10 slides)
@@ -23,6 +31,7 @@ Este repositório contém a apresentação dos resultados do trabalho de confer�
   - `sumario-executivo.md` - Resumo para gestores
   - `guia-uso.md` - Manual de utilização
 - `scripts/` - Scripts de automação
+  - `validate-workflows.sh` - Validador de workflows do GitHub Actions
 - `assets/` - Recursos e imagens
 
 ## 🚀 Como Usar Localmente
@@ -39,6 +48,11 @@ start index.html
 
 # Linux/Mac
 open index.html
+```
+
+3. Para validar os workflows do GitHub Actions:
+```bash
+./scripts/validate-workflows.sh
 ```
 
 ## 📊 Principais Destaques
