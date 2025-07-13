@@ -4,7 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Conferência de Cálculos - PGM Itajaí</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --success-color: #27ae60;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-info: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,248 +31,458 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #2c3e50;
-            background: #f8f9fa;
+            color: var(--dark-color);
+            background: var(--light-color);
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation Styles */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--primary-color) !important;
+        }
+
+        /* Team Highlight Section */
+        .team-highlight {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .team-member-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member-role {
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
         
         .presentation-container {
-            max-width: 1200px;
-            margin: 0 auto;
             background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 2rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 2rem auto;
         }
         
         .slide {
-            min-height: 100vh;
-            padding: 60px 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-bottom: 3px solid #e9ecef;
-            page-break-after: always;
+            padding: 3rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .slide:not(:last-child) {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 2px solid #3498db;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 3px solid var(--secondary-color);
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent-color);
         }
         
         .header h1 {
-            color: #2c3e50;
-            font-size: 2.8em;
-            margin-bottom: 15px;
+            color: var(--dark-color);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1rem;
             font-weight: 700;
+            animation: fadeInUp 0.8s ease;
         }
-        
+
         .header h2 {
-            color: #34495e;
-            font-size: 1.8em;
-            margin-bottom: 10px;
-            font-weight: 400;
+            color: var(--primary-color);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            animation: fadeInUp 0.8s ease 0.2s both;
         }
         
         .header .subtitle {
-            color: #7f8c8d;
-            font-size: 1.2em;
+            color: #6c757d;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             font-style: italic;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         .slide h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
-            margin-bottom: 40px;
+            color: var(--dark-color);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 2rem;
             text-align: center;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 1rem;
+            position: relative;
+            animation: slideInLeft 0.6s ease;
+        }
+
+        .slide h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
         }
         
         .slide h2 {
-            color: #34495e;
-            font-size: 2em;
-            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
         
         .slide h3 {
-            color: #2c3e50;
-            font-size: 1.6em;
-            margin-bottom: 20px;
-            margin-top: 30px;
+            color: var(--dark-color);
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            font-weight: 500;
         }
         
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            gap: 2rem;
+            margin: 3rem 0;
         }
         
         .metric-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 40px 30px;
-            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            border-radius: 1.5rem;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
             transform: translateY(0);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .metric-card:hover::before {
+            transform: scale(1);
         }
         
         .metric-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
         
         .metric-card.success {
-            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            background: var(--gradient-success);
         }
         
         .metric-card.economy {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: var(--gradient-accent);
         }
         
         .metric-card.errors {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: var(--gradient-info);
         }
         
         .metric-number {
-            font-size: 3.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
         
         .metric-label {
-            font-size: 1.3em;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             opacity: 0.95;
-            font-weight: 300;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
         }
         
         .content-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin: 30px 0;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 2rem 0;
             align-items: start;
         }
         
         .process-flow {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid #3498db;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            border-left: 5px solid var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .process-step {
             display: flex;
             align-items: center;
-            margin: 20px 0;
-            padding: 15px;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.6s ease;
+            animation-fill-mode: both;
+        }
+
+        .process-step:nth-child(1) { animation-delay: 0.1s; }
+        .process-step:nth-child(2) { animation-delay: 0.2s; }
+        .process-step:nth-child(3) { animation-delay: 0.3s; }
+        .process-step:nth-child(4) { animation-delay: 0.4s; }
+        .process-step:nth-child(5) { animation-delay: 0.5s; }
+
+        .process-step:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         
         .step-number {
-            background: #3498db;
+            background: var(--secondary-color);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            margin-right: 20px;
+            font-weight: 700;
+            margin-right: 1.5rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
         
         .error-types {
-            margin: 30px 0;
+            margin: 2rem 0;
         }
         
         .error-item {
             background: white;
-            margin: 15px 0;
-            padding: 25px;
-            border-radius: 10px;
-            border-left: 5px solid #e74c3c;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+            margin: 1.5rem 0;
+            padding: 2rem;
+            border-radius: 1rem;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideInRight 0.6s ease;
+            animation-fill-mode: both;
+        }
+
+        .error-item:nth-child(1) { animation-delay: 0.1s; }
+        .error-item:nth-child(2) { animation-delay: 0.2s; }
+        .error-item:nth-child(3) { animation-delay: 0.3s; }
+        .error-item:nth-child(4) { animation-delay: 0.4s; }
+
+        .error-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
         
         .error-item h4 {
-            color: #e74c3c;
-            margin-bottom: 10px;
-            font-size: 1.3em;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
         
         .error-item p {
-            color: #7f8c8d;
-            font-size: 1.1em;
+            color: #6c757d;
+            font-size: 1.1rem;
+            line-height: 1.6;
         }
         
         .impact-value {
             float: right;
-            color: #27ae60;
-            font-weight: bold;
-            font-size: 1.2em;
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: rgba(39, 174, 96, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
         
         .results-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 30px 0;
+            margin: 2rem 0;
             background: white;
-            border-radius: 15px;
+            border-radius: 1.5rem;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .results-table th {
-            background: #34495e;
+            background: var(--dark-color);
             color: white;
-            padding: 20px;
+            padding: 1.5rem;
             text-align: left;
-            font-size: 1.1em;
+            font-size: 1.1rem;
             font-weight: 600;
         }
         
         .results-table td {
-            padding: 18px 20px;
+            padding: 1.2rem 1.5rem;
             border-bottom: 1px solid #e9ecef;
-            font-size: 1.05em;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
         
         .results-table tr:hover {
             background: #f8f9fa;
+            transform: scale(1.01);
         }
         
         .status-accepted {
-            color: #27ae60;
-            font-weight: bold;
+            color: var(--success-color);
+            font-weight: 600;
         }
         
         .status-pending {
             color: #f39c12;
-            font-weight: bold;
+            font-weight: 600;
         }
         
         .status-rejected {
-            color: #e74c3c;
-            font-weight: bold;
+            color: var(--accent-color);
+            font-weight: 600;
         }
         
         .highlight-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-primary);
             color: white;
-            padding: 30px;
-            border-radius: 15px;
+            padding: 2.5rem;
+            border-radius: 1.5rem;
             text-align: center;
-            margin: 40px 0;
-            font-size: 1.4em;
+            margin: 3rem 0;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
             font-weight: 500;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .benefits-list {
@@ -263,298 +492,489 @@
         
         .benefits-list li {
             background: white;
-            margin: 15px 0;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #27ae60;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-            font-size: 1.1em;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 5px solid var(--success-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .benefits-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
         }
         
         .benefits-list li strong {
-            color: #27ae60;
+            color: var(--success-color);
+            font-weight: 600;
         }
         
         .recommendations {
-            background: #fff3cd;
+            background: linear-gradient(145deg, #fff3cd, #ffeaa7);
             border: 1px solid #ffeaa7;
-            border-radius: 15px;
-            padding: 30px;
-            margin: 30px 0;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(255, 234, 167, 0.3);
         }
         
         .recommendations h4 {
             color: #856404;
-            margin-bottom: 20px;
-            font-size: 1.4em;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
         
         .recommendations ul {
             color: #856404;
-            font-size: 1.1em;
+            font-size: 1.1rem;
         }
         
         .recommendations li {
-            margin: 10px 0;
+            margin: 1rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .recommendations li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #856404;
+            font-weight: bold;
         }
         
         .footer-info {
             text-align: center;
-            margin-top: 50px;
-            padding-top: 30px;
+            margin-top: 3rem;
+            padding-top: 2rem;
             border-top: 2px solid #e9ecef;
-            color: #7f8c8d;
-            font-size: 1.1em;
+            color: #6c757d;
+            font-size: 1.1rem;
         }
         
         .chart-placeholder {
-            background: #ecf0f1;
+            background: linear-gradient(145deg, #ecf0f1, #d5d9dc);
             border: 3px dashed #bdc3c7;
-            height: 350px;
+            height: 400px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
-            margin: 30px 0;
-            font-size: 1.2em;
-            color: #7f8c8d;
+            border-radius: 1.5rem;
+            margin: 2rem 0;
+            font-size: 1.3rem;
+            color: #6c757d;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .chart-placeholder:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         .chart-placeholder i {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
             opacity: 0.6;
         }
-        
+
+        /* Enhanced Responsive Design */
         @media print {
+            .navbar-custom, .team-highlight {
+                display: none;
+            }
             .slide {
                 min-height: auto;
                 page-break-inside: avoid;
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
             }
         }
         
         @media (max-width: 768px) {
             .slide {
-                padding: 40px 20px;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
+                padding: 2rem 1rem;
             }
             
             .metrics-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
+
+            .metric-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .team-card {
+                padding: 1rem;
+            }
+
+            .results-table {
+                font-size: 0.8rem;
+            }
+
+            .results-table th,
+            .results-table td {
+                padding: 0.8rem;
+            }
+
+            .process-step {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .presentation-container {
+                margin: 1rem;
+                border-radius: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .slide h1 {
+                font-size: 1.5rem;
+            }
+
+            .metric-number {
+                font-size: 2rem;
+            }
+
+            .error-item {
+                padding: 1.5rem;
+            }
+
+            .impact-value {
+                float: none;
+                display: block;
+                margin-top: 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#inicio">
+                <i class="bi bi-calculator"></i> PGM Itajaí - Relatórios
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#inicio">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resumo">Resumo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#metodologia">Metodologia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resultados">Resultados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#conclusoes">Conclusões</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Team Highlight Section -->
+    <section class="team-highlight" style="margin-top: 76px;">
+        <div class="container">
+            <div class="row text-center mb-4">
+                <div class="col-12">
+                    <h2 class="mb-3">
+                        <i class="bi bi-people-fill me-2"></i>
+                        Equipe do Setor de Cálculos
+                    </h2>
+                    <p class="lead mb-0">Procuradoria Geral do Município de Itajaí</p>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card text-center">
+                        <i class="bi bi-person-circle fs-1 mb-2"></i>
+                        <div class="team-member-name">Fernanda F.</div>
+                        <div class="team-member-role">Agente em Atividades Administrativas</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card text-center">
+                        <i class="bi bi-person-circle fs-1 mb-2"></i>
+                        <div class="team-member-name">Jean C.</div>
+                        <div class="team-member-role">Agente em Atividades Administrativas</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card text-center">
+                        <i class="bi bi-person-circle fs-1 mb-2"></i>
+                        <div class="team-member-name">Ricardo P.</div>
+                        <div class="team-member-role">Agente em Atividades Administrativas</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-card text-center">
+                        <i class="bi bi-person-circle fs-1 mb-2"></i>
+                        <div class="team-member-name">Roger M.</div>
+                        <div class="team-member-role">Agente em Atividades Administrativas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="mb-0 fs-5">
+                        <i class="bi bi-award me-2"></i>
+                        Responsáveis pela conferência técnica e identificação de incorreções nos cálculos judiciais
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="presentation-container">
         
-        <!-- Slide 1: Capa -->
-        <div class="slide">
-            <div class="header">
-                <h1>RELATÓRIO DE CONFERÊNCIA</h1>
-                <h2>Cálculos de Liquidação de Sentença</h2>
-                <p class="subtitle">Procuradoria Geral do Município de Itajaí</p>
-                <p class="subtitle">Período: Julho de 2024 a Julho de 2025</p>
+            <!-- Slide 1: Capa -->
+            <div class="slide" id="inicio">
+                <div class="header">
+                    <h1>RELATÓRIO DE CONFERÊNCIA</h1>
+                    <h2>Cálculos de Liquidação de Sentença</h2>
+                    <p class="subtitle">Procuradoria Geral do Município de Itajaí</p>
+                    <p class="subtitle">Período: Julho de 2024 a Julho de 2025</p>
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="text-primary mb-4">
+                        Análise Técnica e Identificação de Incorreções nos Cálculos Apresentados pela Parte Contrária
+                    </h3>
+                    <p class="lead mx-auto" style="max-width: 800px;">
+                        Este relatório apresenta os resultados do trabalho sistemático de conferência 
+                        de cálculos judiciais, demonstrando as economias geradas para o erário público 
+                        através da identificação e correção de erros nos valores apresentados.
+                    </p>
+                </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 60px;">
-                <h3 style="color: #34495e; margin-bottom: 30px;">
-                    Análise Técnica e Identificação de Incorreções nos Cálculos Apresentados pela Parte Contrária
-                </h3>
-                <p style="font-size: 1.3em; color: #7f8c8d; max-width: 800px; margin: 0 auto;">
-                    Este relatório apresenta os resultados do trabalho sistemático de conferência 
-                    de cálculos judiciais, demonstrando as economias geradas para o erário público 
-                    através da identificação e correção de erros nos valores apresentados.
-                </p>
-            </div>
-        </div>
 
-        <!-- Slide 2: Resumo Executivo -->
-        <div class="slide">
-            <h1>Resumo Executivo</h1>
-            
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-number">154</div>
-                    <div class="metric-label">Processos Analisados</div>
-                </div>
-                <div class="metric-card errors">
-                    <div class="metric-number">116</div>
-                    <div class="metric-label">Erros Identificados</div>
-                </div>
-                <div class="metric-card economy">
-                    <div class="metric-number">R$ 545.954</div>
-                    <div class="metric-label">Economia Total Gerada</div>
-                </div>
-                <div class="metric-card success">
-                    <div class="metric-number">75,3%</div>
-                    <div class="metric-label">Taxa de Aceitação</div>
-                </div>
-            </div>
-            
-            <div class="highlight-box">
-                O trabalho técnico de conferência resultou em economia substancial para os cofres públicos municipais, 
-                demonstrando a importância da análise criteriosa dos cálculos judiciais.
-            </div>
-        </div>
-
-        <!-- Slide 3: Metodologia -->
-        <div class="slide">
-            <h1>Metodologia de Trabalho</h1>
-            
-            <div class="content-grid">
-                <div>
-                    <h3>🔍 Processo de Análise Técnica</h3>
-                    <div class="process-flow">
-                        <div class="process-step">
-                            <div class="step-number">1</div>
-                            <div>
-                                <strong>Recebimento:</strong> Análise inicial dos cálculos apresentados pela parte contrária
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">2</div>
-                            <div>
-                                <strong>Conferência:</strong> Verificação detalhada de cada elemento do cálculo
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">3</div>
-                            <div>
-                                <strong>Identificação:</strong> Catalogação de erros e inconsistências
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">4</div>
-                            <div>
-                                <strong>Cálculo Correto:</strong> Elaboração da versão corrigida
-                            </div>
-                        </div>
-                        <div class="process-step">
-                            <div class="step-number">5</div>
-                            <div>
-                                <strong>Impugnação:</strong> Apresentação técnica das diferenças
-                            </div>
-                        </div>
+            <!-- Slide 2: Resumo Executivo -->
+            <div class="slide animate-on-scroll" id="resumo">
+                <h1>Resumo Executivo</h1>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-number">154</div>
+                        <div class="metric-label">Processos Analisados</div>
+                    </div>
+                    <div class="metric-card errors">
+                        <div class="metric-number">116</div>
+                        <div class="metric-label">Erros Identificados</div>
+                    </div>
+                    <div class="metric-card economy">
+                        <div class="metric-number">R$ 545.954</div>
+                        <div class="metric-label">Economia Total Gerada</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-number">75,3%</div>
+                        <div class="metric-label">Taxa de Aceitação</div>
                     </div>
                 </div>
                 
-                <div>
-                    <h3>📋 Elementos Verificados</h3>
-                    <ul class="benefits-list">
-                        <li><strong>Correção Monetária:</strong> Índices e períodos de aplicação</li>
-                        <li><strong>Juros de Mora:</strong> Taxas e marcos temporais</li>
-                        <li><strong>Base de Cálculo:</strong> Valores principais e acessórios</li>
-                        <li><strong>Legislação Aplicável:</strong> Conformidade normativa</li>
-                        <li><strong>Jurisprudência:</strong> Precedentes dos tribunais superiores</li>
-                    </ul>
+                <div class="highlight-box">
+                    <div style="position: relative; z-index: 2;">
+                        O trabalho técnico de conferência resultou em economia substancial para os cofres públicos municipais, 
+                        demonstrando a importância da análise criteriosa dos cálculos judiciais.
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Slide 4: Tipos de Erros Identificados -->
-        <div class="slide">
-            <h1>Principais Incorreções Identificadas</h1>
-            
-            <div class="error-types">
-                <div class="error-item">
-                    <h4>Correção Monetária Inadequada</h4>
-                    <span class="impact-value">Impacto: R$ 180.000</span>
-                    <p>Aplicação de índices incorretos ou períodos inadequados de correção monetária, 
-                    resultando em valores inflacionados além do devido.</p>
-                </div>
+            <!-- Slide 3: Metodologia -->
+            <div class="slide animate-on-scroll" id="metodologia">
+                <h1>Metodologia de Trabalho</h1>
                 
-                <div class="error-item">
-                    <h4>Juros de Mora Excessivos</h4>
-                    <span class="impact-value">Impacto: R$ 150.000</span>
-                    <p>Utilização de taxas superiores às legalmente estabelecidas ou aplicação 
-                    em períodos inadequados conforme jurisprudência consolidada.</p>
-                </div>
-                
-                <div class="error-item">
-                    <h4>Base de Cálculo Inflada</h4>
-                    <span class="impact-value">Impacto: R$ 125.000</span>
-                    <p>Inclusão indevida de verbas não abrangidas pela condenação ou 
-                    duplicação de valores já contemplados no cálculo principal.</p>
-                </div>
-                
-                <div class="error-item">
-                    <h4>Marcos Temporais Incorretos</h4>
-                    <span class="impact-value">Impacto: R$ 90.954</span>
-                    <p>Definição inadequada de termos inicial e final para incidência 
-                    de correção e juros, contrariando o decidido na sentença.</p>
+                <div class="content-grid">
+                    <div>
+                        <h3><i class="bi bi-search me-2"></i>Processo de Análise Técnica</h3>
+                        <div class="process-flow">
+                            <div class="process-step">
+                                <div class="step-number">1</div>
+                                <div>
+                                    <strong>Recebimento:</strong> Análise inicial dos cálculos apresentados pela parte contrária
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">2</div>
+                                <div>
+                                    <strong>Conferência:</strong> Verificação detalhada de cada elemento do cálculo
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">3</div>
+                                <div>
+                                    <strong>Identificação:</strong> Catalogação de erros e inconsistências
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">4</div>
+                                <div>
+                                    <strong>Cálculo Correto:</strong> Elaboração da versão corrigida
+                                </div>
+                            </div>
+                            <div class="process-step">
+                                <div class="step-number">5</div>
+                                <div>
+                                    <strong>Impugnação:</strong> Apresentação técnica das diferenças
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3><i class="bi bi-clipboard-check me-2"></i>Elementos Verificados</h3>
+                        <ul class="benefits-list">
+                            <li><strong>Correção Monetária:</strong> Índices e períodos de aplicação</li>
+                            <li><strong>Juros de Mora:</strong> Taxas e marcos temporais</li>
+                            <li><strong>Base de Cálculo:</strong> Valores principais e acessórios</li>
+                            <li><strong>Legislação Aplicável:</strong> Conformidade normativa</li>
+                            <li><strong>Jurisprudência:</strong> Precedentes dos tribunais superiores</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Slide 5: Resultados por Processo -->
-        <div class="slide">
-            <h1>Resultados por Processo</h1>
-            
-            <table class="results-table">
-                <thead>
-                    <tr>
-                        <th>Processo</th>
-                        <th>Valor Original</th>
-                        <th>Valor Corrigido</th>
-                        <th>Diferença</th>
-                        <th>Status da Impugnação</th>
-                        <th>Economia</th>
-                    </tr>
-                </thead>                    <tbody>
-                        <tr>
-                            <td>5034326-16.2024.8.24.0033</td>
-                            <td>R$ 125.232,30</td>
-                            <td>R$ 69.640,63</td>
-                            <td>R$ 55.591,67</td>
-                            <td class="status-accepted">✅ Aceita</td>
-                            <td style="color: #27ae60; font-weight: bold;">R$ 55.591,67</td>
-                        </tr>
-                        <tr>
-                            <td>5026205-96.2024.8.24.0033</td>
-                            <td>R$ 48.641,88</td>
-                            <td>R$ 14.878,07</td>
-                            <td>R$ 33.763,81</td>
-                            <td class="status-accepted">✅ Aceita</td>
-                            <td style="color: #27ae60; font-weight: bold;">R$ 33.763,81</td>
-                        </tr>
-                        <tr>
-                            <td>5024556-96.2024.8.24.0033</td>
-                            <td>R$ 75.268,69</td>
-                            <td>R$ 42.296,28</td>
-                            <td>R$ 32.972,41</td>
-                            <td class="status-accepted">✅ Aceita</td>
-                            <td style="color: #27ae60; font-weight: bold;">R$ 32.972,41</td>
-                        </tr>
-                        <tr>
-                            <td>5034395-48.2024.8.24.0033</td>
-                            <td>R$ 63.105,28</td>
-                            <td>R$ 30.802,60</td>
-                            <td>R$ 32.302,68</td>
-                            <td class="status-accepted">✅ Aceita</td>
-                            <td style="color: #27ae60; font-weight: bold;">R$ 32.302,68</td>
-                        </tr>
-                        <tr>
-                            <td>5005575-19.2024.8.24.0033</td>
-                            <td>R$ 44.605,56</td>
-                            <td>R$ 13.143,85</td>
-                            <td>R$ 31.461,71</td>
-                            <td class="status-accepted">✅ Aceita</td>
-                            <td style="color: #27ae60; font-weight: bold;">R$ 31.461,71</td>
-                        </tr>
-                    </tbody>
-            </table>
-            
-            <p style="text-align: center; margin-top: 30px; font-size: 1.2em; color: #7f8c8d;">
-                <em>Dados exemplificativos - substituir pelos casos reais do período analisado</em>
-            </p>
-        </div>
+            <!-- Slide 4: Tipos de Erros Identificados -->
+            <div class="slide animate-on-scroll">
+                <h1>Principais Incorreções Identificadas</h1>
+                
+                <div class="error-types">
+                    <div class="error-item">
+                        <h4><i class="bi bi-exclamation-triangle me-2"></i>Correção Monetária Inadequada</h4>
+                        <span class="impact-value">Impacto: R$ 180.000</span>
+                        <p>Aplicação de índices incorretos ou períodos inadequados de correção monetária, 
+                        resultando em valores inflacionados além do devido.</p>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4><i class="bi bi-percent me-2"></i>Juros de Mora Excessivos</h4>
+                        <span class="impact-value">Impacto: R$ 150.000</span>
+                        <p>Utilização de taxas superiores às legalmente estabelecidas ou aplicação 
+                        em períodos inadequados conforme jurisprudência consolidada.</p>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4><i class="bi bi-calculator me-2"></i>Base de Cálculo Inflada</h4>
+                        <span class="impact-value">Impacto: R$ 125.000</span>
+                        <p>Inclusão indevida de verbas não abrangidas pela condenação ou 
+                        duplicação de valores já contemplados no cálculo principal.</p>
+                    </div>
+                    
+                    <div class="error-item">
+                        <h4><i class="bi bi-clock me-2"></i>Marcos Temporais Incorretos</h4>
+                        <span class="impact-value">Impacto: R$ 90.954</span>
+                        <p>Definição inadequada de termos inicial e final para incidência 
+                        de correção e juros, contrariando o decidido na sentença.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Resultados por Processo -->
+            <div class="slide animate-on-scroll" id="resultados">
+                <h1>Resultados por Processo</h1>
+                
+                <div class="table-responsive">
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th><i class="bi bi-file-text me-2"></i>Processo</th>
+                                <th><i class="bi bi-currency-dollar me-2"></i>Valor Original</th>
+                                <th><i class="bi bi-check-circle me-2"></i>Valor Corrigido</th>
+                                <th><i class="bi bi-arrow-down me-2"></i>Diferença</th>
+                                <th><i class="bi bi-clipboard-check me-2"></i>Status da Impugnação</th>
+                                <th><i class="bi bi-piggy-bank me-2"></i>Economia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>5034326-16.2024.8.24.0033</td>
+                                <td>R$ 125.232,30</td>
+                                <td>R$ 69.640,63</td>
+                                <td>R$ 55.591,67</td>
+                                <td class="status-accepted">✅ Aceita</td>
+                                <td style="color: var(--success-color); font-weight: bold;">R$ 55.591,67</td>
+                            </tr>
+                            <tr>
+                                <td>5026205-96.2024.8.24.0033</td>
+                                <td>R$ 48.641,88</td>
+                                <td>R$ 14.878,07</td>
+                                <td>R$ 33.763,81</td>
+                                <td class="status-accepted">✅ Aceita</td>
+                                <td style="color: var(--success-color); font-weight: bold;">R$ 33.763,81</td>
+                            </tr>
+                            <tr>
+                                <td>5024556-96.2024.8.24.0033</td>
+                                <td>R$ 75.268,69</td>
+                                <td>R$ 42.296,28</td>
+                                <td>R$ 32.972,41</td>
+                                <td class="status-accepted">✅ Aceita</td>
+                                <td style="color: var(--success-color); font-weight: bold;">R$ 32.972,41</td>
+                            </tr>
+                            <tr>
+                                <td>5034395-48.2024.8.24.0033</td>
+                                <td>R$ 63.105,28</td>
+                                <td>R$ 30.802,60</td>
+                                <td>R$ 32.302,68</td>
+                                <td class="status-accepted">✅ Aceita</td>
+                                <td style="color: var(--success-color); font-weight: bold;">R$ 32.302,68</td>
+                            </tr>
+                            <tr>
+                                <td>5005575-19.2024.8.24.0033</td>
+                                <td>R$ 44.605,56</td>
+                                <td>R$ 13.143,85</td>
+                                <td>R$ 31.461,71</td>
+                                <td class="status-accepted">✅ Aceita</td>
+                                <td style="color: var(--success-color); font-weight: bold;">R$ 31.461,71</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <p class="text-center mt-4 text-muted">
+                    <em>Dados exemplificativos - substituir pelos casos reais do período analisado</em>
+                </p>
+            </div>
 
         <!-- Slide 6: Análise de Impacto -->
         <div class="slide">
@@ -707,27 +1127,31 @@
         </div>
 
         <!-- Slide 10: Conclusões -->
-        <div class="slide">
+        <div class="slide animate-on-scroll" id="conclusoes">
             <h1>Conclusões</h1>
             
-            <div style="text-align: center;">
-                <div class="metrics-grid">
-                    <div class="metric-card economy">
-                        <div class="metric-number">R$ 545.954</div>
-                        <div class="metric-label">Economia Total Gerada</div>
-                    </div>
-                    <div class="metric-card success">
-                        <div class="metric-number">75,3%</div>
-                        <div class="metric-label">Taxa de Sucesso</div>
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-lg-6 mx-auto">
+                        <div class="metrics-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="metric-card economy">
+                                <div class="metric-number">R$ 545.954</div>
+                                <div class="metric-label">Economia Total Gerada</div>
+                            </div>
+                            <div class="metric-card success">
+                                <div class="metric-number">75,3%</div>
+                                <div class="metric-label">Taxa de Sucesso</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div style="max-width: 900px; margin: 50px auto;">
-                    <h3 style="color: #2c3e50; margin-bottom: 30px;">
+                <div class="mx-auto" style="max-width: 900px;">
+                    <h3 class="text-primary mb-4">
                         Principais Resultados Alcançados:
                     </h3>
                     
-                    <ul class="benefits-list" style="text-align: left;">
+                    <ul class="benefits-list text-start">
                         <li><strong>Proteção Efetiva do Patrimônio Público:</strong> 
                             Identificação e correção de erros que resultariam em pagamentos indevidos</li>
                         <li><strong>Excelência Técnica Comprovada:</strong> 
@@ -740,27 +1164,82 @@
                 </div>
                 
                 <div class="highlight-box">
-                    O trabalho sistemático de conferência de cálculos demonstra ser uma ferramenta 
-                    essencial para a gestão responsável dos recursos públicos e para a defesa eficiente 
-                    dos interesses do Município de Itajaí.
+                    <div style="position: relative; z-index: 2;">
+                        O trabalho sistemático de conferência de cálculos demonstra ser uma ferramenta 
+                        essencial para a gestão responsável dos recursos públicos e para a defesa eficiente 
+                        dos interesses do Município de Itajaí.
+                    </div>
                 </div>
             </div>
             
             <div class="footer-info">
                 <strong>Procuradoria Geral do Município de Itajaí</strong><br>
                 Setor de Cálculos Judiciais | 11 de julho de 2025
-                
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e9ecef;">
-                    <strong>Equipe do Setor de Cálculos:</strong><br>
-                    <div style="margin-top: 15px; font-size: 1em; line-height: 1.8;">
-                        Fernanda F. - Agente em Atividades Administrativas<br>
-                        Jean C. - Agente em Atividades Administrativas<br>
-                        Ricardo P. - Agente em Atividades Administrativas<br>
-                        Roger M. - Agente em Atividades Administrativas
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Add stagger animation to metric cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const metricCards = document.querySelectorAll('.metric-card');
+            metricCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animation = 'fadeInUp 0.8s ease forwards';
+            });
+        });
+    </script>
 </body>
 </html>
