@@ -1,0 +1,91 @@
+name: Cleanup PR Preview
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Remove PR preview and rebuild index
+        run: |
+          # Create a fresh preview directory structure
+          mkdir -p preview
+          
+          # Copy main branch content to root of preview
+          cp -r * preview/ 2>/dev/null || true
+          rm -rf preview/.git
+          
+          # Create updated index.html for preview root (without the closed PR)
+          cat > preview/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>PR Previews - PGM Itajaí Cálculos</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  .message { padding: 20px; background: #e8f5e8; border-radius: 5px; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🔍 PR Previews - PGM Itajaí Cálculos</h1>
+                  <div class="message">
+                      <p>📋 PR #${{ github.event.number }} foi fechada e sua preview foi removida.</p>
+                      <p>Não há previews de PR ativas no momento.</p>
+                  </div>
+                  <hr>
+                  <p><a href="../">← Voltar para o site principal</a></p>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: preview
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Comment on closed PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const repoOwner = context.repo.owner;
+            const repoName = context.repo.repo;
+            
+            const comment = `🧹 **Preview da PR removida**
+            
+            Como esta PR foi fechada, sua preview foi automaticamente removida do GitHub Pages.
+            
+            ---
+            ⚡ Gerado automaticamente pelo GitHub Actions`;
+            
+            await github.rest.issues.createComment({
+              owner: repoOwner,
+              repo: repoName,
+              issue_number: prNumber,
+              body: comment
+            });

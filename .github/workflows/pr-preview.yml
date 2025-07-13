@@ -1,0 +1,118 @@
+name: Deploy PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Create preview directory structure
+        run: |
+          mkdir -p preview/pr-${{ github.event.number }}
+          cp -r * preview/pr-${{ github.event.number }}/ 2>/dev/null || true
+          # Remove .git directory from preview to avoid issues
+          rm -rf preview/pr-${{ github.event.number }}/.git
+          
+          # Create index.html for preview root that lists all PR previews
+          cat > preview/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>PR Previews - PGM Itajaí Cálculos</title>
+              <style>
+                  body { font-family: Arial, sans-serif; margin: 40px; }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  .pr-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; text-decoration: none; color: #333; border-radius: 5px; }
+                  .pr-link:hover { background: #e0e0e0; }
+              </style>
+          </head>
+          <body>
+              <div class="container">
+                  <h1>🔍 PR Previews - PGM Itajaí Cálculos</h1>
+                  <p>Esta página lista as pré-visualizações de Pull Requests ativas.</p>
+                  <div id="pr-list">
+                      <a href="pr-${{ github.event.number }}/" class="pr-link">
+                          📋 PR #${{ github.event.number }}: ${{ github.event.pull_request.title }}
+                      </a>
+                  </div>
+                  <hr>
+                  <p><a href="../">← Voltar para o site principal</a></p>
+              </div>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: preview
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const repoOwner = context.repo.owner;
+            const repoName = context.repo.repo;
+            const previewUrl = `https://${repoOwner}.github.io/${repoName}/pr-${prNumber}/`;
+            
+            const comment = `🚀 **Preview da PR implantado!**
+            
+            📖 **Visualizar mudanças:** ${previewUrl}
+            
+            Esta preview será atualizada automaticamente a cada novo commit nesta PR.
+            
+            ---
+            ⚡ Gerado automaticamente pelo GitHub Actions`;
+            
+            // Check if we already commented
+            const comments = await github.rest.issues.listComments({
+              owner: repoOwner,
+              repo: repoName,
+              issue_number: prNumber,
+            });
+            
+            const botComments = comments.data.filter(comment => 
+              comment.body.includes('Preview da PR implantado!') && 
+              comment.user.login === 'github-actions[bot]'
+            );
+            
+            if (botComments.length > 0) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: repoOwner,
+                repo: repoName,
+                comment_id: botComments[0].id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo: repoName,
+                issue_number: prNumber,
+                body: comment
+              });
+            }
