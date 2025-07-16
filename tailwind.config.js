@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./Apresentacao_*.html", "./docs/**/*.html"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -16,6 +17,7 @@ module.exports = {
           700: '#22407a',
           800: '#1f3665',
           900: '#1d2f54',
+          950: '#0f172a',
         },
         secondary: {
           DEFAULT: '#3498db',
@@ -29,6 +31,7 @@ module.exports = {
           700: '#1970a1',
           800: '#1a5e85',
           900: '#1c506e',
+          950: '#0c2a3e',
         },
         accent: {
           DEFAULT: '#e74c3c',
@@ -42,6 +45,7 @@ module.exports = {
           700: '#b91c1c',
           800: '#991b1b',
           900: '#7f1d1d',
+          950: '#450a0a',
         },
         success: {
           DEFAULT: '#27ae60',
@@ -55,6 +59,7 @@ module.exports = {
           700: '#15803d',
           800: '#166534',
           900: '#14532d',
+          950: '#052e16',
         },
         dark: {
           DEFAULT: '#2c3e50',
@@ -68,6 +73,7 @@ module.exports = {
           700: '#334155',
           800: '#2c3e50',
           900: '#0f172a',
+          950: '#020617',
         },
         light: {
           DEFAULT: '#ecf0f1',
