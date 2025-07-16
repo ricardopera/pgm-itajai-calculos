@@ -29,5 +29,11 @@ pgmjudcalc.csv
 .vscode/
 .idea/
 
-# Node modules (se usar futuramente)
+# Node modules
 node_modules/
+
+# NPM
+package-lock.json
+
+# Build artifacts
+# dist/ - keeping dist folder for compiled CSS
